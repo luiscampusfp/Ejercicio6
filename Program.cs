@@ -11,6 +11,7 @@ labores administrativas o de gestión de algún tipo de servicio. En este caso, 
 personal administrativo y personal informático.
 • Personal Docente Investigador (PDI): Personal que se dedica a la docencia y a la investigación y en el que incluimos a profesores y
 a investigadores contratados en algún proyecto de investigación.
+
 Todo el personal se identifica con su nombre y DNI y recibe un salario mensual que debemos de calcular, de forma simplificada, como
 el número de horas de trabajo a la semana multiplicado por el importe/hora de su categoría y por el número de semanas al mes (4).
 Los datos de cada tipo de personal son los siguientes (las cantidades no son reales):
