@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 /*
@@ -40,12 +41,107 @@ Para evitar usar decimales en cantidades monetarias podemos trabajar con el dine
 a la hora de mostrarlo por pantalla.
  */
 
+
+/*
+ * Validar que el nombre no tenga numeros y no este vacio
+ * Validar que el DNI tenga formato correcto
+ * Validar que las horas no sean menos de 20 horas semanales ni superior a 40
+ * Validar que no se pague menos de la minima (5 euros)
+ */
 namespace Ejercicio6
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            string nombre = "";
+            string dni = "";
+            int horas = 0;
+            double salario = 0;
+            Personal p = null;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Entre el nombre");
+                    nombre = Console.ReadLine();
+                    Console.WriteLine("Entre el DNI");
+                    dni = Console.ReadLine();
+                    Console.WriteLine("Entre la cantidad de horas");
+                    horas = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Entre el salario hora");
+                    salario = double.Parse(Console.ReadLine());
+                    p = new Personal(nombre, dni, horas, salario);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            } while (p == null);
+
+            Console.WriteLine("Personal creado correctamente.");
+
+            //-----------------------------------------------------------------------------
+            Console.WriteLine("Entre el nombre");
+            nombre = Console.ReadLine();
+            try
+            {
+                if (string.IsNullOrEmpty(nombre))
+                {
+                    throw new Exception("Nombre vacio");
+                }
+                if (nombre.Any(char.IsNumber))
+                {
+                    throw new Exception("El nombre contiene numeros");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("Entre el DNI");
+            dni = Console.ReadLine();
+            //Regex regex = new Regex("^[0-9]{8}[A-Z]$");
+            //Console.WriteLine(regex.IsMatch(dni));
+            try
+            {
+                if (dni.Length != 9 || dni.Substring(0, 8).Any(char.IsLetter) || char.IsNumber(dni[8]))
+                {
+                    throw new Exception("DNI in correcto");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("Entre la cantidad de horas");
+            try
+            {
+                horas = int.Parse(Console.ReadLine());
+                if (horas < 20 || horas > 40)
+                {
+                    throw new Exception("Cantidad de horas no permitidas");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.WriteLine("Entre el salario hora");
+            try
+            {
+                salario = double.Parse(Console.ReadLine());
+                if (salario < 5)
+                {
+                    throw new Exception("Salario por debajo del minimo");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            Console.ReadLine();
 
         }
     }

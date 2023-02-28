@@ -8,15 +8,51 @@ namespace Ejercicio6
 {
     public class Personal
     {
-        protected string nombre;
-        protected string dni;
+        private string nombre;
+        private string dni;
         protected int horas;
         protected double importe;
 
+        protected string Nombre
+        {
+            get => nombre; set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    throw new Exception("Nombre vacio");
+                }
+                if (value.Any(char.IsNumber))
+                {
+                    throw new Exception("El nombre contiene numeros");
+                }
+                nombre = value;
+            }
+        }
+
+        protected string Dni
+        {
+            get => dni; set
+            {
+                if (value.Length != 9 || value.Substring(0, 8).Any(char.IsLetter) || char.IsNumber(value[8]))
+                {
+                    throw new Exception("DNI in correcto");
+                }
+                dni = value;
+            }
+        }
+
         public Personal(string nombre, string dni, int horas, double importe)
         {
-            this.nombre = nombre;
-            this.dni = dni;
+            if (horas < 20 || horas > 40)
+            {
+                throw new Exception("Cantidad de horas no permitidas");
+            }
+            if (importe < 5)
+            {
+                throw new Exception("Salario por debajo del minimo");
+            }
+            Nombre = nombre;
+            Dni = dni;
             this.horas = horas;
             this.importe = importe;
         }
@@ -34,8 +70,9 @@ namespace Ejercicio6
         {
             this.extras = extras;
         }
-        public new double salarioMensual() {
-            return base.salarioMensual() +extras*6;
+        public new double salarioMensual()
+        {
+            return base.salarioMensual() + extras * 6;
         }
     }
 
