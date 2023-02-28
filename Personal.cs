@@ -29,8 +29,13 @@ namespace Ejercicio6
 
     public class PAS : Personal
     {
-        public PAS(string nombre, string dni, int horas, double importe) : base(nombre, dni, horas, importe)
+        protected int extras;
+        public PAS(string nombre, string dni, int horas, double importe, int extras) : base(nombre, dni, horas, importe)
         {
+            this.extras = extras;
+        }
+        public new double salarioMensual() {
+            return base.salarioMensual() +extras*6;
         }
     }
 
@@ -45,14 +50,14 @@ namespace Ejercicio6
 
     public class Administrativo : PAS
     {
-        public Administrativo(string nombre, string dni) : base(nombre, dni, 37, 7.5)
+        public Administrativo(string nombre, string dni, int extras) : base(nombre, dni, 37, 7.5, extras)
         {
         }
     }
 
     public class Informatico : PAS
     {
-        public Informatico(string nombre, string dni) : base(nombre, dni, 40, 6)
+        public Informatico(string nombre, string dni, int extras) : base(nombre, dni, 40, 6, extras)
         {
         }
     }

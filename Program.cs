@@ -46,6 +46,7 @@ namespace Ejercicio6
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
